@@ -1,4 +1,4 @@
-package com.project.entity;
+package com.project.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,15 +16,17 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
-import com.project.entity.enums.EntryStatus;
-import com.project.entity.enums.EntryType;
+import com.project.model.entity.enums.EntryStatus;
+import com.project.model.entity.enums.EntryType;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Builder
+@NoArgsConstructor
+//@Builder
 public class Entry {
 	
 	@Id

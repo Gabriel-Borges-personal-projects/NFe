@@ -1,4 +1,4 @@
-package com.project.entity.enums;
+package com.project.model.entity.enums;
 
 public enum EntryStatus {
 	PENDENTE,
