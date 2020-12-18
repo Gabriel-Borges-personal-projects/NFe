@@ -25,8 +25,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-//@Builder
+@Builder
 public class Entry {
 	
 	@Id

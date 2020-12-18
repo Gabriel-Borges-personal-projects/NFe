@@ -1,7 +1,8 @@
 package com.project.model.entity;
 
-import java.util.Optional;
-
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
@@ -22,9 +24,9 @@ import lombok.Data;
 //@EqualsAndHashCode
 //@RequiredArgsConstructor
 @Data //substitui todos acima
-//@Builder //ex: User user = User.builder().name("gabriel").email("gab@gmail.com").build();
-//@NoArgsConstructor //não pode ser usado com Builder
-//@AllArgsConstructor -> ruim nesse caso devido id
+@Builder //ex: User user = User.builder().name("gabriel").email("gab@gmail.com").build();
+@NoArgsConstructor //se for usado junto ao Builder, precisa ter o @AllArgsConstructor
+@AllArgsConstructor //-> ruim nesse caso devido id
 public class User {
 
 	@Id
@@ -33,9 +35,6 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	
-	public User() {
-		
-	}
+	private Timestamp singUpDate;
 
 }
