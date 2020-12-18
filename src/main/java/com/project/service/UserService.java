@@ -1,4 +1,6 @@
 package com.project.service;
+import java.util.Optional;
+
 import com.project.model.entity.User;
 
 public interface UserService {
@@ -10,4 +12,6 @@ public interface UserService {
 	void validateEmail(String email);
 	
 	void validatePassword(String password);
+	
+	Optional<User> findById(Long Id);
 }

@@ -65,4 +65,14 @@ public class UserServiceImpl implements UserService {
 			throw new BusinessRuleException("Senha inválida para cadastro");
 		}
 	}
+
+	@Override
+	public Optional<User> findById(Long Id) {
+		Optional<User> user = userRepository.findById(Id);
+		if(!user.isPresent()) {
+			throw new BusinessRuleException("Usuário de lançamento não existente");
+		}
+		return user;
+		
+	}
 }

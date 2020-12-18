@@ -20,7 +20,7 @@ import com.project.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	@PostMapping("/signUp")
 	public ResponseEntity signUp(@RequestBody UserDTO userDto){

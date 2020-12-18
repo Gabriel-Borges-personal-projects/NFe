@@ -1,6 +1,7 @@
 package com.project.model.entity;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -44,8 +45,7 @@ public class Entry {
 	private String description;
 	
 	@Column(name = "entry_date")
-	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-	private LocalDate entryDate;
+	private Timestamp entryDate;
 	
 	@Column(name = "entry_type")
 	@Enumerated(value = EnumType.STRING)

@@ -20,7 +20,7 @@ import com.project.model.entity.User;
 import com.project.model.repository.UserRepository;
 
 @ExtendWith(SpringExtension.class)
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class UserServiceTest {
