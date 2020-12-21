@@ -1,6 +1,7 @@
 package com.project.api.dto;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -29,13 +30,13 @@ private Long id;
 	
 	private Integer year;
 	
-	private Long userId;
+	private Long user;
 	
 	private BigDecimal value;
 	
 	private String description;
 	
-	private LocalDate entryDate;
+	private Timestamp date;
 	
 	private String type;
 	

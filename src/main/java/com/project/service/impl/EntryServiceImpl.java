@@ -99,7 +99,7 @@ public class EntryServiceImpl implements EntryService{
 	public Optional<Entry> findById(Long Id) {
 		Optional<Entry> entry = entryRepository.findById(Id);
 		if(!entry.isPresent()) {
-			throw new BusinessRuleException("Usuário de lançamento não existente");
+			throw new BusinessRuleException("Lançamento não existente");
 		}
 		return entry;
 	}

@@ -3,8 +3,10 @@ package com.project.service.impl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 import java.util.TimeZone;
 
@@ -14,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.exception.AuthenticationException;
 import com.project.exception.BusinessRuleException;
+import com.project.model.entity.Entry;
 import com.project.model.entity.User;
+import com.project.model.entity.enums.EntryStatus;
+import com.project.model.entity.enums.EntryType;
+import com.project.model.repository.EntryRepository;
 import com.project.model.repository.UserRepository;
 import com.project.service.UserService;
 
@@ -23,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	EntryRepository entryRepository;
 	
 	@Override
 	public User authUser(String email, String password) {
@@ -74,5 +83,25 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 		
+	}
+
+	@Override
+	public BigDecimal getBalance(Long Id) {
+		Optional<User> user = userRepository.findById(Id);
+		BigDecimal balance = BigDecimal.ZERO;
+		if(!user.isPresent()) {
+			throw new BusinessRuleException("Usuário não encontrado.");
+		}
+		else {
+		List<Entry> confirmedEntries = entryRepository.findByEntryStatusAndUser(EntryStatus.CONFIRMADO, user.get());
+		for(Entry entry : confirmedEntries) {
+			 if(entry.getEntryType().equals(EntryType.RECEITA)) {
+				balance = balance.add(entry.getValue());
+			 }else if(entry.getEntryType().equals(EntryType.DESPESA)){
+				balance = balance.subtract(entry.getValue());
+			 }
+		}
+		}
+		return balance;
 	}
 }

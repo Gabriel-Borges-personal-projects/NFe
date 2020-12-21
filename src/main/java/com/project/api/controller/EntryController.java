@@ -1,5 +1,6 @@
 package com.project.api.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.dto.EntryDTO;
+import com.project.api.dto.EntryStatusDTO;
 import com.project.exception.BusinessRuleException;
 import com.project.model.entity.Entry;
 import com.project.model.entity.User;
@@ -51,15 +53,21 @@ public class EntryController {
 	}
 	}
 	public Entry convertEntry(EntryDTO entryDTO) {
-		Entry entry = Entry.builder()
+		Entry entry = null;
+		try {
+				entry = Entry.builder()
 				.description(entryDTO.getDescription())
 				.year(entryDTO.getYear())
 				.mounth(entryDTO.getMounth())
-				.entryStatus(EntryStatus.valueOf(entryDTO.getStatus()))
+				.entryStatus(EntryStatus.valueOf(entryDTO.getStatus().toUpperCase()))
 				.entryType(EntryType.valueOf(entryDTO.getType().toUpperCase()))
-				.user(userService.findById(entryDTO.getUserId()).get())
+				.user(userService.findById(entryDTO.getUser()).get())
 				.value(entryDTO.getValue())
 				.build();
+		}
+		catch(Exception e) {
+			throw new BusinessRuleException("Erro de conversão de dados: " + e.getMessage());
+		}
 		return entry;
 	}
 	
@@ -67,11 +75,26 @@ public class EntryController {
 	public ResponseEntity updateEntry(@PathVariable("id") Long Id, @RequestBody EntryDTO entryDto) {
 		return entryService.findById(Id).map(entry -> {
 			try{
+				Timestamp date = entry.getEntryDate();
 				entry = convertEntry(entryDto);
 				entry.setId(Id);
+				entry.setEntryDate(date);
 				entryService.update(entry);
 				return ResponseEntity.ok(entry);
 			}catch (BusinessRuleException e) {
+				return ResponseEntity.badRequest().body(e.getMessage());
+			}
+		}).orElseGet( () -> new ResponseEntity("Lançamento não encontrado", HttpStatus.BAD_REQUEST));
+	}
+	
+	@PutMapping("/changeStatus/{id}")
+	public ResponseEntity changeEntryStatus(@PathVariable("id") Long Id, @RequestBody EntryStatusDTO entryStatusDto) {
+		return entryService.findById(Id).map(entry -> {
+			try{
+				entry.setEntryStatus(EntryStatus.valueOf(entryStatusDto.getStatus().toUpperCase()));
+				entryService.update(entry);
+				return ResponseEntity.ok(entry);
+			}catch (Exception e) {
 				return ResponseEntity.badRequest().body(e.getMessage());
 			}
 		}).orElseGet( () -> new ResponseEntity("Lançamento não encontrado", HttpStatus.BAD_REQUEST));
@@ -94,7 +117,8 @@ public class EntryController {
 			@RequestParam(value = "description", required = false) String description,
 			@RequestParam(value = "mounth", required = false) Integer mounth,
 			@RequestParam(value = "year", required = false) Integer year,
-			@RequestParam(value = "userId") Long userId)
+			@RequestParam(value = "type", required = false) String type,
+			@RequestParam(value = "user") Long userId)
 	{			
 		Optional<User> user;
 		try{
@@ -107,6 +131,7 @@ public class EntryController {
 				.mounth(mounth)
 				.year(year)
 				.user(user.get())
+				.entryType(type == null ? null : EntryType.valueOf(type.toUpperCase()))
 				.build();
 		List<Entry> entries = entryService.getEntrys(entry);
 		return ResponseEntity.ok(entries);

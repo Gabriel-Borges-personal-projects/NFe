@@ -20,6 +20,7 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import com.project.model.entity.enums.EntryStatus;
 import com.project.model.entity.enums.EntryType;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Entry {
 	
 	@Id

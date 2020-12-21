@@ -1,9 +1,12 @@
 package com.project.api.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,5 +50,15 @@ public class UserController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 			
+	}
+	@GetMapping("/balance/{id}")
+	public ResponseEntity getBalance(@PathVariable("id") Long Id) {
+		try {
+			BigDecimal balance = userService.getBalance(Id);
+			return ResponseEntity.ok(balance);
+		} catch (BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
 	}
 }

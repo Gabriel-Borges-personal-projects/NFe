@@ -1,4 +1,5 @@
 package com.project.service;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.project.model.entity.User;
@@ -14,4 +15,6 @@ public interface UserService {
 	void validatePassword(String password);
 	
 	Optional<User> findById(Long Id);
+
+	BigDecimal getBalance(Long Id);
 }
