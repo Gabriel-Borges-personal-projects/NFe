@@ -16,13 +16,17 @@ import com.project.model.entity.User;
 import com.project.model.entity.enums.EntryStatus;
 import com.project.model.entity.enums.EntryType;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EntryDTO {
 private Long id;
 	

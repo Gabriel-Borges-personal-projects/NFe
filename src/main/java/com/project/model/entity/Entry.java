@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Check;
 import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
@@ -51,6 +52,7 @@ public class Entry {
 	private Timestamp entryDate;
 	
 	@Column(name = "entry_type")
+//	, columnDefinition = "VARCHAR(60) CHECK (entry_type in ('RECEITA', 'DESPESA'))")
 	@Enumerated(value = EnumType.STRING)
 	private EntryType entryType;
 	
