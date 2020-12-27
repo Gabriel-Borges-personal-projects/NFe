@@ -112,26 +112,30 @@ public class EntryController {
 		}).orElseGet(() -> new ResponseEntity("Lançamento não encontrado", HttpStatus.BAD_REQUEST));
 	}
 	
-	@GetMapping
+	@GetMapping("/search")
 	public ResponseEntity searchEntries(
-			@RequestParam(value = "description", required = false) String description,
-			@RequestParam(value = "mounth", required = false) Integer mounth,
 			@RequestParam(value = "year", required = false) Integer year,
+			@RequestParam(value = "mounth", required = false) Integer mounth,
 			@RequestParam(value = "type", required = false) String type,
-			@RequestParam(value = "user") Long userId)
+			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "description", required = false) String description,
+			@RequestParam(value = "user", required = false) Long userId)
 	{			
-		Optional<User> user;
+		User user = null;
+		if(userId!=null) {
 		try{
-			user = userService.findById(userId);
+			user = userService.findById(userId).get();
 		} catch (BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 		}
 		Entry entry = Entry.builder()
 				.description(description)
 				.mounth(mounth)
 				.year(year)
-				.user(user.get())
+				.user(user)
 				.entryType(type == null ? null : EntryType.valueOf(type.toUpperCase()))
+				.entryStatus(status == null ? null : EntryStatus.valueOf(status.toUpperCase()))
 				.build();
 		List<Entry> entries = entryService.getEntrys(entry);
 		return ResponseEntity.ok(entries);

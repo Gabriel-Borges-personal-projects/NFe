@@ -1,6 +1,7 @@
 package com.project.api.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,16 @@ public class UserController {
 		try {
 			BigDecimal balance = userService.getBalance(Id);
 			return ResponseEntity.ok(balance);
+		} catch (BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		
+	}
+	@GetMapping("/getUsers")
+	public ResponseEntity getAllUsers() {
+		try {
+			List<User> users = userService.getAllUsers();
+			return ResponseEntity.ok(users);
 		} catch (BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}

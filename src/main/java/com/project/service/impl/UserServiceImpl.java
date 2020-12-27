@@ -51,11 +51,18 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User saveUser(User user) {
 		this.validatePassword(user.getPassword());
+		this.validadeName(user.getName());
 		this.validateEmail(user.getEmail());
 		LocalDateTime date = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(date);
 		user.setSingUpDate(timestamp);
 		return userRepository.save(user);
+	}
+
+	private void validadeName(String name) {
+		if(name == null || name.equals("")) {
+			throw new BusinessRuleException("Campo nome é obrigatório");
+		}	
 	}
 
 	@Override
@@ -71,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	public void validatePassword(String password) {
 		
 		if(password == null || password.equals("")) {
-			throw new BusinessRuleException("Senha inválida para cadastro");
+			throw new BusinessRuleException("Campo senha é obrigatório");
 		}
 	}
 
@@ -103,5 +110,10 @@ public class UserServiceImpl implements UserService {
 		}
 		}
 		return balance;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 }

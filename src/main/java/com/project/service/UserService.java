@@ -1,5 +1,6 @@
 package com.project.service;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 import com.project.model.entity.User;
@@ -17,4 +18,6 @@ public interface UserService {
 	Optional<User> findById(Long Id);
 
 	BigDecimal getBalance(Long Id);
+	
+	List<User> getAllUsers();
 }
