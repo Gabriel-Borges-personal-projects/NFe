@@ -3,6 +3,7 @@ package com.project.api.controller;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,7 +59,7 @@ public class EntryController {
 				entry = Entry.builder()
 				.description(entryDTO.getDescription())
 				.year(entryDTO.getYear())
-				.mounth(entryDTO.getMounth())
+				.month(entryDTO.getMonth())
 				.entryStatus(EntryStatus.valueOf(entryDTO.getStatus().toUpperCase()))
 				.entryType(EntryType.valueOf(entryDTO.getType().toUpperCase()))
 				.user(userService.findById(entryDTO.getUser()).get())
@@ -120,10 +121,11 @@ public class EntryController {
 	@GetMapping("/search")
 	public ResponseEntity searchEntries(
 			@RequestParam(value = "year", required = false) Integer year,
-			@RequestParam(value = "mounth", required = false) Integer mounth,
+			@RequestParam(value = "month", required = false) Integer month,
 			@RequestParam(value = "type", required = false) String type,
 			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "description", required = false) String description,
+			@RequestParam(value = "value", required = false) Double value,
 			@RequestParam(value = "user", required = false) Long userId)
 	{			
 		User user = null;
@@ -136,11 +138,12 @@ public class EntryController {
 		}
 		Entry entry = Entry.builder()
 				.description(description)
-				.mounth(mounth)
+				.month(month)
 				.year(year)
 				.user(user)
 				.entryType(type == null ? null : EntryType.valueOf(type.toUpperCase()))
 				.entryStatus(status == null ? null : EntryStatus.valueOf(status.toUpperCase()))
+				.value(value == null ? null : BigDecimal.valueOf(value))
 				.build();
 		List<Entry> entries = entryService.getEntrys(entry);
 		return ResponseEntity.ok(entries);

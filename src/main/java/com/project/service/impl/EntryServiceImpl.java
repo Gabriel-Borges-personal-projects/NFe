@@ -77,7 +77,7 @@ public class EntryServiceImpl implements EntryService{
 		if(entry.getDescription() == null || entry.getDescription().trim().equals("")) {
 			throw new BusinessRuleException("O campo descrição é obrigatório");
 		}
-		if(entry.getMounth() == null) {
+		if(entry.getMonth() == null) {
 			throw new BusinessRuleException("O campo mês é obrigatório");
 		}
 		if(entry.getYear() ==  null) {

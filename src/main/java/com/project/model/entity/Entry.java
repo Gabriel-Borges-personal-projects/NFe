@@ -37,7 +37,7 @@ public class Entry {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	private Integer mounth;
+	private Integer month;
 	
 	private Integer year;
 	

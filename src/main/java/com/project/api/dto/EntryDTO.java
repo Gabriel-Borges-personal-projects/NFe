@@ -30,7 +30,7 @@ import lombok.Setter;
 public class EntryDTO {
 private Long id;
 	
-	private Integer mounth;
+	private Integer month;
 	
 	private Integer year;
 	
