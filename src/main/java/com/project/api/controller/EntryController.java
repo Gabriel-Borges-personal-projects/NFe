@@ -102,6 +102,7 @@ public class EntryController {
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity deleteEntry(@PathVariable("id") Long Id) {
+		try {
 		return entryService.findById(Id).map(entry -> {
 			try {
 			entryService.delete(entry);
@@ -109,7 +110,11 @@ public class EntryController {
 			} catch (BusinessRuleException e) {
 				return ResponseEntity.badRequest().body(e.getMessage());
 			}
-		}).orElseGet(() -> new ResponseEntity("Lançamento não encontrado", HttpStatus.BAD_REQUEST));
+		}).orElseGet(() -> new ResponseEntity("Lançamento não existente", HttpStatus.BAD_REQUEST));
+		}
+		catch(BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("/search")
