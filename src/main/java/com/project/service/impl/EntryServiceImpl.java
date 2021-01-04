@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -62,7 +63,15 @@ public class EntryServiceImpl implements EntryService{
 				.matching()
 				.withIgnoreCase()
 				.withStringMatcher(StringMatcher.CONTAINING));
-		return entryRepository.findAll(example);
+		List<Entry> exampleList = entryRepository.findAll(example);
+		List<Entry> entryList = entryRepository.findAllByOrderByIdDesc();
+		List<Entry> finalList = new ArrayList<Entry>();
+		for(Entry entry : entryList) {
+			if(exampleList.contains(entry)) {
+				finalList.add(entry);
+			}
+		}
+		return finalList;
 	}
 
 	@Override
