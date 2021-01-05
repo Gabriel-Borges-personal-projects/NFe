@@ -66,9 +66,9 @@ public class UserServiceTest {
 //	                //ex : objectName.thisMethodShoulThrowNullPointerExceptionForNullParameter(null);
 //	                });
 //	}
-	@Test
-	public void verifyDate() {
-		Optional<User> user = userRepository.findByName("gabriel");
-		System.out.println(user.get().getSingUpDate());
-	}
+//	@Test
+//	public void verifyDate() {
+//		Optional<User> user = userRepository.findByName("gabriel");
+//		System.out.println(user.get().getSingUpDate());
+//	}
 }

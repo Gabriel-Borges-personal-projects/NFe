@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.api.dto.ResponseUserDTO;
 import com.project.api.dto.UserDTO;
 import com.project.exception.AuthenticationException;
 import com.project.exception.BusinessRuleException;
@@ -36,7 +37,7 @@ public class UserController {
 		
 		try {
 			user = userService.saveUser(user);
-			return new ResponseEntity(user, HttpStatus.CREATED);
+			return new ResponseEntity(HttpStatus.CREATED);
 		}catch (BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
@@ -45,7 +46,12 @@ public class UserController {
 	public ResponseEntity authUser(@RequestBody UserDTO userDto) {
 		try {
 			User user = userService.authUser(userDto.getEmail(), userDto.getPassword());
-			return ResponseEntity.ok(user);
+			ResponseUserDTO responseUser = ResponseUserDTO.builder()
+					.id(user.getId())
+					.name(user.getName())
+					.email(user.getEmail())
+					.build();
+			return ResponseEntity.ok(responseUser);
 		}
 		catch(AuthenticationException e){
 			return ResponseEntity.badRequest().body(e.getMessage());
