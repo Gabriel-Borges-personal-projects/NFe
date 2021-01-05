@@ -37,7 +37,7 @@ public class UserController {
 		
 		try {
 			user = userService.saveUser(user);
-			return new ResponseEntity(HttpStatus.CREATED);
+			return new ResponseEntity(user.getId(), HttpStatus.CREATED);
 		}catch (BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
