@@ -20,4 +20,6 @@ public interface UserService {
 	BigDecimal getBalance(Long Id);
 	
 	List<User> getAllUsers();
+
+	User findByEmail(String email);
 }

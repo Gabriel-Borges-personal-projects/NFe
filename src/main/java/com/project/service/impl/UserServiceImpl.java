@@ -87,6 +87,16 @@ public class UserServiceImpl implements UserService {
 		return user;
 		
 	}
+	
+	@Override
+	public User findByEmail(String email) {
+		Optional<User> user = userRepository.findByEmail(email);
+		if(!user.isPresent()) {
+			throw new BusinessRuleException("Usuário de lançamento não existente");
+		}
+		return user.get();
+		
+	}
 
 	@Override
 	public BigDecimal getBalance(Long Id) {
