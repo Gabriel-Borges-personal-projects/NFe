@@ -45,32 +45,28 @@ public class JwtAuthenticationController {
 	@PostMapping("/authenticate")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 		
-		System.out.println("entrou");
-		System.out.println(authenticationRequest.getUsername().toString() + " " + authenticationRequest.getPassword());
+		
 		
 //		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-		UserDTO userDto = UserDTO.builder()
-				.email(authenticationRequest.getUsername())
-				.passwd(authenticationRequest.getPassword())
-				.build();
 		try {
-			User user = userService.authUser(userDto.getEmail(), userDto.getPasswd());
+			User user = userService.authUser(authenticationRequest.getEmail(), authenticationRequest.getPasswd());
 			ResponseUserDTO responseUser = ResponseUserDTO.builder()
 					.id(user.getId())
 					.name(user.getName())
 					.email(user.getEmail())
 					.build();
-//			return ResponseEntity.ok(responseUser);
+			
+			final UserDetails userDetails = userDetailsService
+					.loadUserByUsername(authenticationRequest.getEmail());
+			
+			final String token = jwtTokenUtil.generateToken(userDetails);
+			
+			return ResponseEntity.ok(new JwtResponse(responseUser, token));
 		}
 		catch(AuthenticationException e){
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
-		final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(userDto.getEmail());
 		
-		final String token = jwtTokenUtil.generateToken(userDetails);
-		
-		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
 	private void authenticate(String username, String password) throws Exception {

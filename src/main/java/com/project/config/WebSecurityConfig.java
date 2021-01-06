@@ -55,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// Qualquer outra requisição deve ser checada
 	.anyRequest()
 	.authenticated()
-	.and()	
+	.and().cors() //para habilitar cors
+	.and().csrf().disable() // para a linha de cima não dar problema na de baixo
 	.exceptionHandling()
 	.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 	.and()
