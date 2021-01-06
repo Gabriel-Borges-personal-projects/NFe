@@ -30,7 +30,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/users")
+@RequestMapping("/api/jwt")
 public class JwtAuthenticationController {
 
 	@Autowired
