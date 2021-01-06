@@ -32,7 +32,7 @@ public class UserController {
 		User user = User.builder()
 				.name(userDto.getName())
 				.email(userDto.getEmail())
-				.password(userDto.getPassword())
+				.password(userDto.getPasswd())
 				.build();
 		
 		try {
@@ -45,7 +45,7 @@ public class UserController {
 	@PostMapping("/auth")
 	public ResponseEntity authUser(@RequestBody UserDTO userDto) {
 		try {
-			User user = userService.authUser(userDto.getEmail(), userDto.getPassword());
+			User user = userService.authUser(userDto.getEmail(), userDto.getPasswd());
 			ResponseUserDTO responseUser = ResponseUserDTO.builder()
 					.id(user.getId())
 					.name(user.getName())
