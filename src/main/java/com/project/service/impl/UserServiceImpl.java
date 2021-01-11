@@ -2,6 +2,8 @@ package com.project.service.impl;
 
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		if(!user.isPresent()) {
 			throw new AuthenticationException("Email não cadastrado");
 		}
-		if(!user.get().getPassword().equals(password)) {
+		if(!user.get().getPassword().equals(encryptPassword(password))) {
 			throw new AuthenticationException("Senha incorreta");
 		}
 		
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService {
 		LocalDateTime date = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(date);
 		user.setSingUpDate(timestamp);
+		user.setPassword(encryptPassword(user.getPassword()));
 		return userRepository.save(user);
 	}
 
@@ -113,5 +116,24 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User updateUser(User user) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public String encryptPassword(String password) {
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new BusinessRuleException(e.getMessage());
+		}
+        md.update(password.getBytes());
+        byte[] digest = md.digest();
+        StringBuffer sb = new StringBuffer();
+
+        for (byte b : digest)
+            sb.append(String.format("%02x", b & 0xff));
+        
+		return sb.toString();
 	}
 }

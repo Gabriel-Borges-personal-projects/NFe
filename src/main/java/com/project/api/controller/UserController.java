@@ -1,6 +1,9 @@
 package com.project.api.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +40,14 @@ public class UserController {
 	private JwtTokenUtil jwtTokenUtil;
 	
 	@PostMapping("/signUp")
-	public ResponseEntity signUp(@RequestBody UserDTO userDto){
+	public ResponseEntity signUp(@RequestBody UserDTO userDto) throws NoSuchAlgorithmException, UnsupportedEncodingException{
+
 		User user = User.builder()
 				.name(userDto.getName())
 				.email(userDto.getEmail())
 				.password(userDto.getPasswd())
 				.build();
-		
+		 
 		try {
 			user = userService.saveUser(user);
 			return new ResponseEntity(user.getId(), HttpStatus.CREATED);
