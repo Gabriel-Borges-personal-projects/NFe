@@ -114,7 +114,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User updateUser(User user) {
+	public User updateUserPassword(User user) {
+		user.setPassword(encryptPassword(user.getPassword()));
+		if(user.getRecoverPasswordHash() != null) {
+			user.setRecoverPasswordHash(null);
+		}
 		return userRepository.save(user);
 	}
 
@@ -135,5 +139,14 @@ public class UserServiceImpl implements UserService {
             sb.append(String.format("%02x", b & 0xff));
         
 		return sb.toString();
+	}
+
+	@Override
+	public User findByHash(String hash) {
+		Optional<User> user = userRepository.findByRecoverPasswordHash(hash);
+		if(!user.isPresent()) {
+			throw new BusinessRuleException("Solicitação de recuperação de senha não encontrada");
+		}
+		return user.get();
 	}
 }

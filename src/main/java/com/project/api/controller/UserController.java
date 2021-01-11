@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.api.dto.ChangePasswordDTO;
@@ -113,11 +114,40 @@ public class UserController {
 		user.setPassword(changePasswordDto.getNewPassword());
 		
 		try {
-			user = userService.updateUser(user);
+			user = userService.updateUserPassword(user);
 			return new ResponseEntity(user.getId(), HttpStatus.OK);
 		}catch (BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}
 	
+	@GetMapping("/getUserFromHash")
+	public ResponseEntity searchEntries(
+			@RequestParam(value = "hash") String hash)
+	{
+		try {
+			User user = userService.findByHash(hash);
+			ResponseUserDTO responseUserDTO = ResponseUserDTO.builder()
+					.email(user.getEmail())
+					.build();
+			return new ResponseEntity(responseUserDTO, HttpStatus.OK);
+		}catch (BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
+	@PutMapping("/redefinePassword")
+	public ResponseEntity redefinePassword(@RequestParam(value = "hash") String hash,
+											@RequestBody UserDTO userDTO) {
+		
+		try {
+			User user = userService.findByHash(hash);
+			user.setPassword(userDTO.getPasswd());
+			userService.updateUserPassword(user);
+			return new ResponseEntity(HttpStatus.OK);
+		}catch (BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+		
 }

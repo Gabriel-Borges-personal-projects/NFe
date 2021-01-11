@@ -11,7 +11,7 @@ public interface UserService {
 	
 	User saveUser(User user);
 	
-	User updateUser(User user);
+	User updateUserPassword(User user);
 	
 	void validateEmail(String email);
 	
@@ -22,6 +22,9 @@ public interface UserService {
 	List<User> getAllUsers();
 
 	User findByEmail(String email);
+
+	User findByHash(String hash);
 	
 	String encryptPassword(String password);
+	
 }

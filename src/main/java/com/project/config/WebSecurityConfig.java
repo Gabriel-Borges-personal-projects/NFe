@@ -50,7 +50,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	httpSecurity.csrf().disable()
 	// Não cheque essas requisições
 	.authorizeRequests()
-	.antMatchers("/api/jwt/authenticate","/api/users/signUp", "/api/email/recoverPassword")
+	.antMatchers("/api/jwt/authenticate",
+				"/api/users/signUp",
+				"/api/users/getUserFromHash*",
+				"/api/users/redefinePassword*",
+				"/api/email/recoverPassword")
 	.permitAll()
 	// Qualquer outra requisição deve ser checada
 	.anyRequest()
