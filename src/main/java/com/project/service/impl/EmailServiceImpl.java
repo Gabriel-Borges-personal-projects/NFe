@@ -1,5 +1,9 @@
 package com.project.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
+
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +11,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.project.exception.BusinessRuleException;
+import com.project.model.entity.User;
+import com.project.model.repository.UserRepository;
 import com.project.service.EmailService;
+import com.project.service.UserService;
 
 @Service
 public class EmailServiceImpl implements EmailService{
@@ -15,20 +23,42 @@ public class EmailServiceImpl implements EmailService{
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Override
-	public void sendRecoverPasswordEmail() {
+	public String sendRecoverPasswordEmail(User user, String url) {
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		String password = user.getEmail() + timestamp.toString();
+		
+		String hash = userService.encryptPassword(password);
+		user.setRecoverPasswordHash(hash);
+		userRepository.save(user);
+		
+		String emailContent = url + "/" + hash;
 		try {
 			 MimeMessage mail = mailSender.createMimeMessage();
 		
 		     MimeMessageHelper helper = new MimeMessageHelper( mail );
-		     helper.setTo( "borges.gabrielc@gmail.com" );
-		     helper.setSubject( "Teste Envio de e-mail" );
-		     helper.setText("<p>Hello from Spring Boot Application</p>", true);
+		     helper.setTo( user.getEmail() );
+		     helper.setSubject( "Recuperação de Senha" );
+		     helper.setText("<p>"+ emailContent +"</p>", true);
 		     mailSender.send(mail);
 		} catch (Exception e) {
             e.printStackTrace();
         }
+		return emailContent;
 		
+	}
+	
+	public String hashRecoverPassword(String email, String password) {
+		
+		return password;
+			
 	}
 
 }

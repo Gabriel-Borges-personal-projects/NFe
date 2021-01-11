@@ -36,5 +36,6 @@ public class User {
 	private String email;
 	private String password;
 	private Timestamp singUpDate;
+	private String recoverPasswordHash;
 
 }

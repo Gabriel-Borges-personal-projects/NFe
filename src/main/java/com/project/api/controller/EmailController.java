@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.api.dto.RecoverPasswordDTO;
 import com.project.api.dto.UserDTO;
 import com.project.exception.BusinessRuleException;
 import com.project.model.entity.User;
@@ -27,13 +28,13 @@ public class EmailController {
 	private UserService userService;
 	
 	@PostMapping("/recoverPassword")
-	public ResponseEntity recoverPassword(@RequestBody UserDTO userDto) {
+	public ResponseEntity recoverPassword(@RequestBody RecoverPasswordDTO recoverPasswordDTO) {
 		
 		try {
 			
-			User user = userService.findByEmail(userDto.getEmail());
-			emailService.sendRecoverPasswordEmail();
-			return new ResponseEntity(user.getId(), HttpStatus.OK);
+			User user = userService.findByEmail(recoverPasswordDTO.getEmail());
+			String url = emailService.sendRecoverPasswordEmail(user, recoverPasswordDTO.getUrl());
+			return new ResponseEntity(url, HttpStatus.OK);
 			
 		}catch(BusinessRuleException e) {
 			return ResponseEntity.badRequest().body(e.getMessage());

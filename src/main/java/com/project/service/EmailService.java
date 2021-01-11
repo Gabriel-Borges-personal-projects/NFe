@@ -1,7 +1,9 @@
 package com.project.service;
 
+import com.project.model.entity.User;
+
 public interface EmailService {
 
-	void sendRecoverPasswordEmail();
+	String sendRecoverPasswordEmail(User user, String url);
 
 }
