@@ -102,6 +102,9 @@ public class UserController {
 		if(!user.getPassword().equals(changePasswordDto.getCurrentPassword())) {
 			return ResponseEntity.badRequest().body("Senha atual incorreta");
 		} 
+		if(user.getPassword().equals(changePasswordDto.getNewPassword())) {
+			return ResponseEntity.badRequest().body("A nova senha não pode ser a mesma da atual");
+		} 
 		
 		user.setPassword(changePasswordDto.getNewPassword());
 		
