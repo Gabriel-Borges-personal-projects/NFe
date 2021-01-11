@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.api.dto.ChangePasswordDTO;
 import com.project.api.dto.ResponseUserDTO;
 import com.project.api.dto.UserDTO;
 import com.project.config.JwtTokenUtil;
@@ -88,4 +90,27 @@ public class UserController {
 		}
 		
 	}
+	
+	@PutMapping("/changePassword")
+	public ResponseEntity signUp(@RequestHeader("Authorization") String token,
+			@RequestBody ChangePasswordDTO changePasswordDto)
+	{
+		token = token.substring(7);
+		String email = jwtTokenUtil.getUsernameFromToken(token);
+		User user = userService.findByEmail(email);
+		
+		if(!user.getPassword().equals(changePasswordDto.getCurrentPassword())) {
+			return ResponseEntity.badRequest().body("Senha atual incorreta");
+		} 
+		
+		user.setPassword(changePasswordDto.getNewPassword());
+		
+		try {
+			user = userService.updateUser(user);
+			return new ResponseEntity(user.getId(), HttpStatus.OK);
+		}catch (BusinessRuleException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+	}
+	
 }

@@ -11,9 +11,9 @@ public interface UserService {
 	
 	User saveUser(User user);
 	
-	void validateEmail(String email);
+	User updateUser(User user);
 	
-	void validatePassword(String password);
+	void validateEmail(String email);
 	
 	Optional<User> findById(Long Id);
 

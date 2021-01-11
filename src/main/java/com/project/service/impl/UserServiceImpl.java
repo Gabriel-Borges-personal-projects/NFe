@@ -46,8 +46,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public User saveUser(User user) {
-		this.validatePassword(user.getPassword());
-		this.validadeName(user.getName());
 		this.validateEmail(user.getEmail());
 		LocalDateTime date = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(date);
@@ -55,11 +53,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(user);
 	}
 
-	private void validadeName(String name) {
-		if(name == null || name.equals("")) {
-			throw new BusinessRuleException("Campo nome é obrigatório");
-		}	
-	}
 
 	@Override
 	public void validateEmail(String email) {
@@ -70,13 +63,6 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	@Override
-	public void validatePassword(String password) {
-		
-		if(password == null || password.equals("")) {
-			throw new BusinessRuleException("Campo senha é obrigatório");
-		}
-	}
 
 	@Override
 	public Optional<User> findById(Long Id) {
@@ -121,5 +107,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public User updateUser(User user) {
+		return userRepository.save(user);
 	}
 }
