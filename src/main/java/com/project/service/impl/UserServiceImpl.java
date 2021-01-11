@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 	public User findByEmail(String email) {
 		Optional<User> user = userRepository.findByEmail(email);
 		if(!user.isPresent()) {
-			throw new BusinessRuleException("Usuário de lançamento não existente");
+			throw new BusinessRuleException("Usuário não existente");
 		}
 		return user.get();
 		
