@@ -14,6 +14,8 @@ public interface UserService {
 	User updateUserPassword(User user);
 	
 	void validateEmail(String email);
+
+	void validateName(String name);
 	
 	Optional<User> findById(Long Id);
 
@@ -23,7 +25,7 @@ public interface UserService {
 
 	User findByEmail(String email);
 
-	User findByHash(String hash);
+	User findByNameAndHash(String name, String hash);
 	
 	String encryptPassword(String password);
 	

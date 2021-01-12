@@ -39,14 +39,14 @@ public class EmailServiceImpl implements EmailService{
 		user.setRecoverPasswordHash(hash);
 		userRepository.save(user);
 		
-		String emailContent = url + "/" + hash;
+		String emailContent = url + "/" + user.getName() + "/" + hash;
 		try {
 			 MimeMessage mail = mailSender.createMimeMessage();
 		
 		     MimeMessageHelper helper = new MimeMessageHelper( mail );
 		     helper.setTo( user.getEmail() );
 		     helper.setSubject( "Recuperação de Senha" );
-		     helper.setText("<p>"+ emailContent +"</p>", true);
+		     helper.setText("<p>Acesse o link abaixo para redifinir sua senha: <p> <p>" + emailContent +"</p>", true);
 		     mailSender.send(mail);
 		} catch (Exception e) {
             e.printStackTrace();

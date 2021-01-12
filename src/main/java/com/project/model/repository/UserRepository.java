@@ -12,9 +12,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	
 	Optional<User> findByEmail(String email);
 	
-	Optional<User> findByRecoverPasswordHash(String hash);
+	Optional<User> findByNameAndRecoverPasswordHash(String name, String hash);
 	
 	boolean existsByEmail(String email);
+	
+	boolean existsByName(String name);
 	
 	
 }

@@ -123,10 +123,11 @@ public class UserController {
 	
 	@GetMapping("/getUserFromHash")
 	public ResponseEntity searchEntries(
+			@RequestParam(value = "name") String name,
 			@RequestParam(value = "hash") String hash)
 	{
 		try {
-			User user = userService.findByHash(hash);
+			User user = userService.findByNameAndHash(name, hash);
 			ResponseUserDTO responseUserDTO = ResponseUserDTO.builder()
 					.email(user.getEmail())
 					.build();
@@ -137,11 +138,12 @@ public class UserController {
 	}
 	
 	@PutMapping("/redefinePassword")
-	public ResponseEntity redefinePassword(@RequestParam(value = "hash") String hash,
+	public ResponseEntity redefinePassword( @RequestParam(value = "name") String name,
+										 	@RequestParam(value = "hash") String hash,
 											@RequestBody UserDTO userDTO) {
 		
 		try {
-			User user = userService.findByHash(hash);
+			User user = userService.findByNameAndHash(name, hash);
 			user.setPassword(userDTO.getPasswd());
 			userService.updateUserPassword(user);
 			return new ResponseEntity(HttpStatus.OK);

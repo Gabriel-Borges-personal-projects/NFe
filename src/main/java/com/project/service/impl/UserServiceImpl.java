@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User saveUser(User user) {
 		this.validateEmail(user.getEmail());
+		this.validateName(user.getName());
 		LocalDateTime date = LocalDateTime.now();
 		Timestamp timestamp = Timestamp.valueOf(date);
 		user.setSingUpDate(timestamp);
@@ -61,7 +62,16 @@ public class UserServiceImpl implements UserService {
 	public void validateEmail(String email) {
 		boolean exists = userRepository.existsByEmail(email);
 		if(exists) {
-			throw new BusinessRuleException("email já cadastrado");
+			throw new BusinessRuleException("Email já cadastrado");
+		}
+		
+	}
+	
+	@Override
+	public void validateName(String name) {
+		boolean exists = userRepository.existsByName(name);
+		if(exists) {
+			throw new BusinessRuleException("Nome já cadastrado");
 		}
 		
 	}
@@ -142,8 +152,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByHash(String hash) {
-		Optional<User> user = userRepository.findByRecoverPasswordHash(hash);
+	public User findByNameAndHash(String name, String hash) {
+		Optional<User> user = userRepository.findByNameAndRecoverPasswordHash(name, hash);
 		if(!user.isPresent()) {
 			throw new BusinessRuleException("Solicitação de recuperação de senha não encontrada");
 		}
