@@ -1,8 +1,8 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementaï¿½ï¿½o de Referï¿½ncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2021.01.12 às 07:40:42 PM BRT 
+// Todas as modificaï¿½ï¿½es neste arquivo serï¿½o perdidas apï¿½s a recompilaï¿½ï¿½o do esquema de origem. 
+// Gerado em: 2021.01.12 ï¿½s 07:40:42 PM BRT 
 //
 
 
@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -20,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * <p>Classe Java de TNfeProc complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteï¿½do esperado contido dentro desta classe.
  * 
  * <pre>
  * &lt;complexType name="TNfeProc">
@@ -38,6 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
+@XmlRootElement(name="nfeProc")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TNfeProc", propOrder = {
     "nFe",
@@ -45,7 +47,12 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TNfeProc {
 
-    @XmlElement(name = "NFe", required = true)
+    @Override
+	public String toString() {
+		return "TNfeProc [nFe=" + nFe + ", protNFe=" + protNFe + ", versao=" + versao + "]";
+	}
+
+	@XmlElement(name = "NFe", required = true)
     protected TNFe nFe;
     @XmlElement(required = true)
     protected TProtNFe protNFe;
@@ -53,7 +60,7 @@ public class TNfeProc {
     protected String versao;
 
     /**
-     * Obtém o valor da propriedade nFe.
+     * Obtï¿½m o valor da propriedade nFe.
      * 
      * @return
      *     possible object is
@@ -77,7 +84,7 @@ public class TNfeProc {
     }
 
     /**
-     * Obtém o valor da propriedade protNFe.
+     * Obtï¿½m o valor da propriedade protNFe.
      * 
      * @return
      *     possible object is
@@ -101,7 +108,7 @@ public class TNfeProc {
     }
 
     /**
-     * Obtém o valor da propriedade versao.
+     * Obtï¿½m o valor da propriedade versao.
      * 
      * @return
      *     possible object is

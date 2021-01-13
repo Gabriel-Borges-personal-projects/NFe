@@ -32,7 +32,13 @@ import org.w3._2000._09.xmldsig_.SignatureType;
 })
 public class TNFe {
 
-    @XmlElement(required = true)
+    @Override
+	public String toString() {
+		return "TNFe [infNFe=" + infNFe + ", infNFeSupl=" + infNFeSupl + ", signature=" + signature + "]";
+	}
+
+
+	@XmlElement(required = true)
     protected TNFe.InfNFe infNFe;
     protected TNFe.InfNFeSupl infNFeSupl;
     @XmlElement(name = "Signature", namespace = "http://www.w3.org/2000/09/xmldsig#", required = true)
