@@ -2,11 +2,11 @@
 // Este arquivo foi gerado pela Arquitetura JavaTM para Implementa��o de Refer�ncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas as modifica��es neste arquivo ser�o perdidas ap�s a recompila��o do esquema de origem. 
-// Gerado em: 2021.01.12 �s 07:40:42 PM BRT 
+// Gerado em: 2021.01.13 �s 08:25:11 PM BRT 
 //
 
 
-package br.inf.portalfiscal.nfe;
+package PL;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -47,12 +47,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TNfeProc {
 
-    @Override
-	public String toString() {
-		return "TNfeProc [nFe=" + nFe + ", protNFe=" + protNFe + ", versao=" + versao + "]";
-	}
-
-	@XmlElement(name = "NFe", required = true)
+    @XmlElement(name = "NFe", required = true)
     protected TNFe nFe;
     @XmlElement(required = true)
     protected TProtNFe protNFe;

@@ -2,11 +2,11 @@
 // Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
-// Gerado em: 2021.01.12 às 07:40:42 PM BRT 
+// Gerado em: 2021.01.13 às 08:25:11 PM BRT 
 //
 
 
-package br.inf.portalfiscal.nfe;
+package PL;
 
 import java.util.ArrayList;
 import java.util.List;
