@@ -18,21 +18,21 @@ public class Test {
 	
 	public static void main(String args[]) throws JAXBException, FileNotFoundException {
 		
-//		JAXBContext jaxbContext     = JAXBContext.newInstance( TNfeProc.class );
-//		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test2.xml" );
-//		TNfeProc tNfeProc = (TNfeProc) jaxbUnmarshaller.unmarshal( inStream );
-//		System.out.println(tNfeProc.getNFe().getInfNFe().getEmit().getCNPJ());
-//		System.out.println(tNfeProc.getNFe().getInfNFe().getIde().getCUF());
-//		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().get(0).getProd().getCProd());
-//		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().get(0).getProd().getUTrib());
-//		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().size());
-		
-		JAXBContext jaxbContext     = JAXBContext.newInstance( TProcEvento.class );
+		JAXBContext jaxbContext = JAXBContext.newInstance( TNfeProc.class );
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test3.xml" );
-		TProcEvento tProcEvento = (TProcEvento) jaxbUnmarshaller.unmarshal( inStream );
-		System.out.println(tProcEvento.getEvento().getInfEvento().getCOrgao());
+		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test.xml" );
+		TNfeProc tNfeProc = (TNfeProc) jaxbUnmarshaller.unmarshal( inStream );
+		System.out.println(tNfeProc.getNFe().getInfNFe().getEmit().getCNPJ());
+		System.out.println(tNfeProc.getNFe().getInfNFe().getIde().getCUF());
+		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().get(0).getProd().getCProd());
+		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().get(0).getProd().getUTrib());
+		System.out.println(tNfeProc.getNFe().getInfNFe().getDet().size());
+//		
+//		JAXBContext jaxbContext     = JAXBContext.newInstance( TProcEvento.class );
+//		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+//		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test3.xml" );
+//		TProcEvento tProcEvento = (TProcEvento) jaxbUnmarshaller.unmarshal( inStream );
+//		System.out.println(tProcEvento.getEvento().getInfEvento().getCOrgao());
 		
 	}
 	

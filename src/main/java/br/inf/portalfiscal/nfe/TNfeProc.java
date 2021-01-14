@@ -47,11 +47,6 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class TNfeProc {
 
-    @Override
-	public String toString() {
-		return "TNfeProc [nFe=" + nFe + ", protNFe=" + protNFe + ", versao=" + versao + "]";
-	}
-
 	@XmlElement(name = "NFe", required = true)
     protected TNFe nFe;
     @XmlElement(required = true)

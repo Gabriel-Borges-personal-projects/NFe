@@ -54,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/api/users/signUp",
 				"/api/users/getUserFromHash*",
 				"/api/users/redefinePassword*",
-				"/api/email/recoverPassword")
+				"/api/email/recoverPassword",
+				"/api/files/uploadFile")
 	.permitAll()
 	// Qualquer outra requisição deve ser checada
 	.anyRequest()
