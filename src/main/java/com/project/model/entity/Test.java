@@ -8,8 +8,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import br.inf.portalfiscal.nfe.TNfeProc;
+import PL.TNfeProc;
 import br.inf.portalfiscal.nfe.TProcEvento;
+
+//import br.inf.portalfiscal.nfe.TProcEvento;
 
 public class Test {
 	
@@ -18,9 +20,9 @@ public class Test {
 	
 	public static void main(String args[]) throws JAXBException, FileNotFoundException {
 		
-		JAXBContext jaxbContext = JAXBContext.newInstance( TNfeProc.class );
+		JAXBContext jaxbContext     = JAXBContext.newInstance( TNfeProc.class );
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test.xml" );
+		InputStream inStream = new FileInputStream( "D:\\Dev\\NF\\NFs\\xml\\test2.xml" );
 		TNfeProc tNfeProc = (TNfeProc) jaxbUnmarshaller.unmarshal( inStream );
 		System.out.println(tNfeProc.getNFe().getInfNFe().getEmit().getCNPJ());
 		System.out.println(tNfeProc.getNFe().getInfNFe().getIde().getCUF());

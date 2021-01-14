@@ -1,12 +1,12 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementaï¿½ï¿½o de Referï¿½ncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificaï¿½ï¿½es neste arquivo serï¿½o perdidas apï¿½s a recompilaï¿½ï¿½o do esquema de origem. 
-// Gerado em: 2021.01.12 ï¿½s 07:40:42 PM BRT 
+// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+// Gerado em: 2021.01.13 às 08:25:11 PM BRT 
 //
 
 
-package br.inf.portalfiscal.nfe;
+package PL;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,6 +14,123 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
+
+/**
+ * Tipo Dados do Local de Retirada ou Entrega // 24/10/08 - tamanho mínimo // v2.0
+ * 
+ * <p>Classe Java de TLocal complex type.
+ * 
+ * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
+ * 
+ * <pre>
+ * &lt;complexType name="TLocal">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;choice>
+ *           &lt;element name="CNPJ" type="{http://www.portalfiscal.inf.br/nfe}TCnpjOpc"/>
+ *           &lt;element name="CPF" type="{http://www.portalfiscal.inf.br/nfe}TCpf"/>
+ *         &lt;/choice>
+ *         &lt;element name="xNome" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="2"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="xLgr">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="2"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="nro">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="1"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="xCpl" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="1"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="xBairro">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="2"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="cMun" type="{http://www.portalfiscal.inf.br/nfe}TCodMunIBGE"/>
+ *         &lt;element name="xMun">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="2"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="UF" type="{http://www.portalfiscal.inf.br/nfe}TUf"/>
+ *         &lt;element name="CEP" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;whiteSpace value="preserve"/>
+ *               &lt;pattern value="[0-9]{8}"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="cPais" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;whiteSpace value="preserve"/>
+ *               &lt;pattern value="[0-9]{1,4}"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="xPais" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;maxLength value="60"/>
+ *               &lt;minLength value="2"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="fone" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *               &lt;whiteSpace value="preserve"/>
+ *               &lt;pattern value="[0-9]{6,14}"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="email" minOccurs="0">
+ *           &lt;simpleType>
+ *             &lt;restriction base="{http://www.portalfiscal.inf.br/nfe}TString">
+ *               &lt;whiteSpace value="preserve"/>
+ *               &lt;minLength value="1"/>
+ *               &lt;maxLength value="60"/>
+ *             &lt;/restriction>
+ *           &lt;/simpleType>
+ *         &lt;/element>
+ *         &lt;element name="IE" type="{http://www.portalfiscal.inf.br/nfe}TIe" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
+ * </pre>
+ * 
+ * 
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TLocal", propOrder = {
     "cnpj",
@@ -64,7 +181,7 @@ public class TLocal {
     protected String ie;
 
     /**
-     * Obtï¿½m o valor da propriedade cnpj.
+     * Obtém o valor da propriedade cnpj.
      * 
      * @return
      *     possible object is
@@ -88,7 +205,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade cpf.
+     * Obtém o valor da propriedade cpf.
      * 
      * @return
      *     possible object is
@@ -112,7 +229,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xNome.
+     * Obtém o valor da propriedade xNome.
      * 
      * @return
      *     possible object is
@@ -136,7 +253,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xLgr.
+     * Obtém o valor da propriedade xLgr.
      * 
      * @return
      *     possible object is
@@ -160,7 +277,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade nro.
+     * Obtém o valor da propriedade nro.
      * 
      * @return
      *     possible object is
@@ -184,7 +301,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xCpl.
+     * Obtém o valor da propriedade xCpl.
      * 
      * @return
      *     possible object is
@@ -208,7 +325,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xBairro.
+     * Obtém o valor da propriedade xBairro.
      * 
      * @return
      *     possible object is
@@ -232,7 +349,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade cMun.
+     * Obtém o valor da propriedade cMun.
      * 
      * @return
      *     possible object is
@@ -256,7 +373,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xMun.
+     * Obtém o valor da propriedade xMun.
      * 
      * @return
      *     possible object is
@@ -280,7 +397,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade uf.
+     * Obtém o valor da propriedade uf.
      * 
      * @return
      *     possible object is
@@ -304,7 +421,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade cep.
+     * Obtém o valor da propriedade cep.
      * 
      * @return
      *     possible object is
@@ -328,7 +445,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade cPais.
+     * Obtém o valor da propriedade cPais.
      * 
      * @return
      *     possible object is
@@ -352,7 +469,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade xPais.
+     * Obtém o valor da propriedade xPais.
      * 
      * @return
      *     possible object is
@@ -376,7 +493,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade fone.
+     * Obtém o valor da propriedade fone.
      * 
      * @return
      *     possible object is
@@ -400,7 +517,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade email.
+     * Obtém o valor da propriedade email.
      * 
      * @return
      *     possible object is
@@ -424,7 +541,7 @@ public class TLocal {
     }
 
     /**
-     * Obtï¿½m o valor da propriedade ie.
+     * Obtém o valor da propriedade ie.
      * 
      * @return
      *     possible object is

@@ -1,35 +1,34 @@
 //
-// Este arquivo foi gerado pela Arquitetura JavaTM para Implementaï¿½ï¿½o de Referï¿½ncia (JAXB) de Bind XML, v2.2.8-b130911.1802 
+// Este arquivo foi gerado pela Arquitetura JavaTM para Implementação de Referência (JAXB) de Bind XML, v2.2.8-b130911.1802 
 // Consulte <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
-// Todas as modificaï¿½ï¿½es neste arquivo serï¿½o perdidas apï¿½s a recompilaï¿½ï¿½o do esquema de origem. 
-// Gerado em: 2021.01.12 ï¿½s 07:40:42 PM BRT 
+// Todas as modificações neste arquivo serão perdidas após a recompilação do esquema de origem. 
+// Gerado em: 2021.01.13 às 08:25:11 PM BRT 
 //
 
 
-package br.inf.portalfiscal.nfe;
+package PL;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- *  Tipo da NF-e processada
+ * Tipo Pedido de Consulta do Recido do Lote de Notas Fiscais Eletrônicas
  * 
- * <p>Classe Java de TNfeProc complex type.
+ * <p>Classe Java de TConsReciNFe complex type.
  * 
- * <p>O seguinte fragmento do esquema especifica o conteï¿½do esperado contido dentro desta classe.
+ * <p>O seguinte fragmento do esquema especifica o conteúdo esperado contido dentro desta classe.
  * 
  * <pre>
- * &lt;complexType name="TNfeProc">
+ * &lt;complexType name="TConsReciNFe">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="NFe" type="{http://www.portalfiscal.inf.br/nfe}TNFe"/>
- *         &lt;element name="protNFe" type="{http://www.portalfiscal.inf.br/nfe}TProtNFe"/>
+ *         &lt;element name="tpAmb" type="{http://www.portalfiscal.inf.br/nfe}TAmb"/>
+ *         &lt;element name="nRec" type="{http://www.portalfiscal.inf.br/nfe}TRec"/>
  *       &lt;/sequence>
  *       &lt;attribute name="versao" use="required" type="{http://www.portalfiscal.inf.br/nfe}TVerNFe" />
  *     &lt;/restriction>
@@ -39,71 +38,70 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@XmlRootElement(name="nfeProc")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TNfeProc", propOrder = {
-    "nFe",
-    "protNFe"
+@XmlType(name = "TConsReciNFe", propOrder = {
+    "tpAmb",
+    "nRec"
 })
-public class TNfeProc {
+public class TConsReciNFe {
 
-	@XmlElement(name = "NFe", required = true)
-    protected TNFe nFe;
     @XmlElement(required = true)
-    protected TProtNFe protNFe;
+    protected String tpAmb;
+    @XmlElement(required = true)
+    protected String nRec;
     @XmlAttribute(name = "versao", required = true)
     protected String versao;
 
     /**
-     * Obtï¿½m o valor da propriedade nFe.
+     * Obtém o valor da propriedade tpAmb.
      * 
      * @return
      *     possible object is
-     *     {@link TNFe }
+     *     {@link String }
      *     
      */
-    public TNFe getNFe() {
-        return nFe;
+    public String getTpAmb() {
+        return tpAmb;
     }
 
     /**
-     * Define o valor da propriedade nFe.
+     * Define o valor da propriedade tpAmb.
      * 
      * @param value
      *     allowed object is
-     *     {@link TNFe }
+     *     {@link String }
      *     
      */
-    public void setNFe(TNFe value) {
-        this.nFe = value;
+    public void setTpAmb(String value) {
+        this.tpAmb = value;
     }
 
     /**
-     * Obtï¿½m o valor da propriedade protNFe.
+     * Obtém o valor da propriedade nRec.
      * 
      * @return
      *     possible object is
-     *     {@link TProtNFe }
+     *     {@link String }
      *     
      */
-    public TProtNFe getProtNFe() {
-        return protNFe;
+    public String getNRec() {
+        return nRec;
     }
 
     /**
-     * Define o valor da propriedade protNFe.
+     * Define o valor da propriedade nRec.
      * 
      * @param value
      *     allowed object is
-     *     {@link TProtNFe }
+     *     {@link String }
      *     
      */
-    public void setProtNFe(TProtNFe value) {
-        this.protNFe = value;
+    public void setNRec(String value) {
+        this.nRec = value;
     }
 
     /**
-     * Obtï¿½m o valor da propriedade versao.
+     * Obtém o valor da propriedade versao.
      * 
      * @return
      *     possible object is
