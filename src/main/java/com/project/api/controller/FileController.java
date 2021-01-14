@@ -33,9 +33,8 @@ public class FileController {
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam(value = "file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
-
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                .path("/api/files/downloadFile/")
                 .path(fileName)
                 .toUriString();
 
@@ -55,7 +54,6 @@ public class FileController {
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);
-
         // Try to determine file's content type
         String contentType = null;
         try {
@@ -68,7 +66,6 @@ public class FileController {
         if(contentType == null) {
             contentType = "application/octet-stream";
         }
-
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
